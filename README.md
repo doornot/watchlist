@@ -18,7 +18,7 @@ create & active virtual enviroment then install dependencies:
 ```
 $ python3 -m venv env  # use `python ...` on Windows
 $ source env/bin/activate  # use `env\Scripts\activate` on Windows
-(env) $ pip install -r requirements.txt
+(env) $ pip3 install -r requirements.txt
 ```
 
 generate fake data then run:

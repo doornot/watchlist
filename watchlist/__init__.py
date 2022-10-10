@@ -5,6 +5,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
+import logging
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(name)s:%(message)s')
+logging.getLogger().setLevel(logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 # SQLite URI compatible
 WIN = sys.platform.startswith('win')
 if WIN:
@@ -23,6 +28,7 @@ login_manager = LoginManager(app)
 
 @login_manager.user_loader
 def load_user(user_id):
+    logger.info('[user_id] %s', user_id)
     from watchlist.models import User
     user = User.query.get(int(user_id))
     return user
@@ -36,6 +42,7 @@ login_manager.login_view = 'login'
 def inject_user():
     from watchlist.models import User
     user = User.query.first()
+    logger.info('[user] %s', user)
     return dict(user=user)
 
 
